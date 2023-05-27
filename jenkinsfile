@@ -1,0 +1,52 @@
+pipeline {
+	agent any     
+	stages{
+		stage ('one'){
+			
+			steps{
+				echo "executing version ${param.VERSION}"
+			}
+		}
+		stage ('Two'){
+			steps{
+				input("hi, do you wanna proceed?")
+			}
+			
+		}
+		
+		stage ('Three'){
+		
+			when{
+				not {
+					Branch "master"
+				}
+			}
+			steps {
+				echo "Hello"
+			}
+			
+		}
+		stage("Four"){
+			Parallel {
+				stage("Unit Test"){
+					steps{
+						echo "Running the unit test"
+					}
+				}
+				stage("Integration Test"){
+					agent {
+						docker {
+							reuseNode false
+							Image 'ubuntu'
+						}
+					}
+					steps{
+						echo "Running the integration test .."
+					}
+					
+				}
+			}
+		}
+	}
+
+}
