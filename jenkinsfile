@@ -27,7 +27,7 @@ pipeline {
 			
 		}
 		stage("Four"){
-			Parallel {
+			parallel {
 				stage("Unit Test"){
 					steps{
 						echo "Running the unit test"
@@ -37,7 +37,7 @@ pipeline {
 					agent {
 						docker {
 							reuseNode false
-							Image 'ubuntu'
+							image 'ubuntu'
 						}
 					}
 					steps{
