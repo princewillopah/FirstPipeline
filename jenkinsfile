@@ -4,7 +4,7 @@ pipeline {
 		stage ('one'){
 			
 			steps{
-				echo "executing version ${param.VERSION}"
+				echo "executing version VERSION"
 			}
 		}
 		stage ('Two'){
