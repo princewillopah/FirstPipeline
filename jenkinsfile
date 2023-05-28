@@ -13,7 +13,15 @@ pipeline {
 			}
 			
 		}
-		
+		stage('Example') {
+			steps {
+				withCredentials([usernamePassword(credentialsId: '75dfb4ed-7b1d-4d34-a0ff-c06422bbbf7b', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+				sh 'echo $USERNAME'
+				sh 'echo $PASSWORD'
+				// Use the $USERNAME and $PASSWORD variables in your script
+				}
+			}
+		}
 		stage ('Three'){
 		
 			when{
@@ -42,6 +50,10 @@ pipeline {
 					// }
 					steps{
 						echo "Running the integration test .."
+
+    
+    
+
 					}
 					
 				}
